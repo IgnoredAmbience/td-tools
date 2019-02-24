@@ -12,7 +12,11 @@ if [[ $# -gt 0 ]]; then
   y=${1:0:4}
   m=${1:4:2}
   d=${1:6:2}
-  exec wget "https://cdn.area51.onl/archive/rail/td/${y}/${m#0}/${d#0}.tbz2"
+  wget "https://cdn.area51.onl/archive/rail/td/${y}/${m#0}/${d#0}.tbz2"
+  mv ${d#0}.tbz2 $1.tbz2
+  tar jxf $1.tbz2
+  ./expand-names.sh
+  exit 0
 fi
 
 base="https://networkrail.opendata.opentraintimes.com/mirror/td/"
